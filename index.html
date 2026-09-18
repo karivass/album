@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Record Vault: Dynamic Music Archive – My Album</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html-640605f58ae58ee79329c070719e555b.min.css" rel="stylesheet" append-hash="true" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+
+
+</head>
+
+<body>
+
+
+<header id="title-block-header">
+
+
+</header>
+
+
+<!-- Load Database -->
+<script src="assets/data.js"></script>
+
+<style>
+  /* =========================================================
+     1. BASE MINIMALIST WHITE THEME (DEFAULT STATE)
+     ========================================================= */
+  :root {
+    --bg-page: #ffffff;
+    --bg-surface: #f9fafb;
+    --bg-card: #ffffff;
+    --border-color: #e5e7eb;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --accent-color: #111827;
+    --accent-glow: rgba(0, 0, 0, 0.08);
+    --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --text-transform: none;
+    --tag-bg: #f3f4f6;
+    --tag-text: #374151;
+    --pill-bg: #111827;
+    --pill-text: #ffffff;
+    --spotify-green: #1db954;
+    --spotify-dark: #121212;
+    --spotify-bar-bg: #181818;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    transition: background-color 0.45s ease, color 0.45s ease;
+    min-height: 100vh;
+    padding-bottom: 130px; /* Space for Spotify dock */
+  }
+
+  .main-wrapper {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
+
+  /* Header Bar */
+  .vault-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 24px;
+    transition: border-color 0.4s ease;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+  }
+  .brand-logo h1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: var(--text-transform);
+    font-family: var(--font-heading);
+  }
+  .brand-badge {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .back-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+  }
+
+  /* Search & Genre Controls */
+  .directory-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .search-input-wrap {
+    position: relative;
+    max-width: 480px;
+  }
+  .search-input {
+    width: 100%;
+    padding: 10px 16px 10px 38px;
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .search-input:focus {
+    border-color: var(--text-primary);
+  }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  /* Genre Filter Strip */
+  .genre-filter-bar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+  .genre-filter-bar::-webkit-scrollbar { display: none; }
+
+  .genre-pill {
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  .genre-pill:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+  }
+  .genre-pill.active {
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    border-color: var(--pill-bg);
+    box-shadow: 0 4px 12px var(--accent-glow);
+  }
+
+  /* Minimalist Intro Banner */
+  .catalog-hero {
+    margin-bottom: 24px;
+  }
+  .catalog-hero h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+  .catalog-hero p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 720px;
+  }
+
+  /* =========================================================
+     2. CATALOG VIEW (ARTISTS & ALBUMS GRID)
+     ========================================================= */
+  .catalog-section-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .artist-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+    margin-bottom: 40px;
+  }
+
+  .catalog-artist-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 18px;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .catalog-artist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    border-color: #111827;
+  }
+
+  .artist-portrait-wrap {
+    width: 100%;
+    height: 190px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    background: #e5e7eb;
+  }
+  .artist-portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .catalog-artist-card:hover .artist-portrait {
+    transform: scale(1.04);
+  }
+
+  .artist-card-info {
+    flex: 1;
+  }
+  .artist-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .artist-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+  .artist-country {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+  .artist-genre-pill {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .artist-bio-snippet {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  .artist-albums-preview {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 10px;
+  }
+  .album-mini-thumb {
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .album-mini-info {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  /* =========================================================
+     3. IMMERSIVE ALBUM VIEW (THE TRANSFORMED EXPERIENCE)
+     ========================================================= */
+  #albumExperienceView {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .album-immersive-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+  @media (max-width: 980px) {
+    .album-immersive-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Turntable & Artwork Stage */
+  .turntable-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 28px;
+    text-align: center;
+    position: sticky;
+    top: 24px;
+    box-shadow: 0 16px 36px var(--accent-glow);
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+
+  .vinyl-rig {
+    position: relative;
+    width: 270px;
+    height: 270px;
+    margin: 0 auto 20px;
+  }
+  .vinyl-disc {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #252525 20%, #111 22%, #222 40%, #111 42%, #202020 60%, #0d0d0d 62%, #1a1a1a 80%, #050505 100%);
+    top: 10px;
+    left: 45px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .vinyl-disc.spinning {
+    animation: spinRecord 3.2s linear infinite;
+  }
+  @keyframes spinRecord {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .vinyl-center-sticker {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    border: 3px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: #111;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 4px;
+  }
+  .album-sleeve {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.4);
+    z-index: 2;
+    background: #222;
+  }
+  .album-sleeve img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .stage-album-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 6px;
+    text-transform: var(--text-transform);
+    font-family: var(--font-heading);
+  }
+  .stage-artist-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 6px;
+  }
+  .stage-album-meta {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  /* DYNAMIC PER-SONG VIBE MATCH RECOMMENDATION PANEL */
+  .vibe-match-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 14px;
+    margin-top: 18px;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+  .vibe-match-title {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .vibe-match-subtitle {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .vibe-match-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .vibe-match-chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  .vibe-match-chip:hover {
+    border-color: var(--accent-color);
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px var(--accent-glow);
+  }
+  .vibe-match-artist {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .vibe-match-song {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  /* Right Tracklist & Transparent Scoring */
+  .immersive-track-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 16px 36px var(--accent-glow);
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+
+  .immersive-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+  .immersive-panel-header h2 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-transform: var(--text-transform);
+    font-family: var(--font-heading);
+  }
+
+  /* Track Row */
+  .track-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .track-card:hover {
+    border-color: var(--accent-color);
+    transform: translateX(3px);
+  }
+  .track-card.active {
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 16px var(--accent-glow);
+  }
+
+  .track-card-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .track-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    overflow: hidden;
+  }
+  .track-index-num {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    min-width: 24px;
+  }
+  .track-title-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: var(--text-transform);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .track-vibe-badge {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-weight: 600;
+  }
+
+  .track-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .track-time {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+  .track-score-badge {
+    font-size: 0.92rem;
+    font-weight: 900;
+    background: var(--accent-color);
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 14px;
+    min-width: 58px;
+    text-align: center;
+  }
+  .track-play-btn {
+    background: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.15s ease;
+  }
+  .track-play-btn:hover {
+    transform: scale(1.08);
+  }
+
+  /* Expandable Score Breakdown */
+  .score-breakdown-panel {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-color);
+    animation: fadeIn 0.25s ease;
+  }
+  .why-metric-quote {
+    background: rgba(0,0,0,0.04);
+    border-left: 3px solid var(--accent-color);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+  .pillars-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .pillar-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 8px 12px;
+  }
+  .pillar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .pillar-bar-shell {
+    height: 6px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .pillar-bar-fill {
+    height: 100%;
+    background: var(--accent-color);
+    border-radius: 3px;
+  }
+  .pillar-val-txt {
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+
+  .interactive-user-rater {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 0.84rem;
+  }
+  .interactive-user-rater input[type="range"] {
+    accent-color: var(--accent-color);
+    cursor: pointer;
+    width: 150px;
+  }
+
+  /* Equalizer wave in track line */
+  .track-eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+    margin-left: 4px;
+  }
+  .track-eq-bar {
+    width: 3px;
+    background: var(--accent-color);
+    border-radius: 1px;
+    animation: bounceBar 0.8s ease-in-out infinite alternate;
+  }
+  .track-eq-bar:nth-child(1) { height: 30%; animation-delay: 0.1s; }
+  .track-eq-bar:nth-child(2) { height: 90%; animation-delay: 0.3s; }
+  .track-eq-bar:nth-child(3) { height: 50%; animation-delay: 0.2s; }
+  @keyframes bounceBar {
+    0% { height: 20%; }
+    100% { height: 100%; }
+  }
+
+  /* =========================================================
+     4. SPOTIFY-EXACT FLOATING BOTTOM PLAYER DOCK
+     ========================================================= */
+  .spotify-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 90px;
+    background-color: var(--spotify-bar-bg);
+    border-top: 1px solid #282828;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 10000;
+    transform: translateY(120%);
+    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+    color: #ffffff;
+    user-select: none;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.6);
+  }
+  .spotify-dock.visible {
+    transform: translateY(0);
+  }
+
+  /* Left: Cover, Track & Artist, Heart */
+  .spotify-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 30%;
+    min-width: 180px;
+  }
+  .spotify-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+  .spotify-track-meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .spotify-track-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.25;
+  }
+  .spotify-artist-name {
+    font-size: 0.72rem;
+    color: #b3b3b3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    line-height: 1.3;
+  }
+  .spotify-artist-name:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+  .spotify-heart-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.15rem;
+    color: #b3b3b3;
+    padding: 4px;
+    margin-left: 6px;
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+  .spotify-heart-btn:hover {
+    transform: scale(1.15);
+    color: #ffffff;
+  }
+  .spotify-heart-btn.liked {
+    color: var(--spotify-green);
+  }
+
+  /* Center: Mix/Shuffle, Prev, Play/Pause, Next, Repeat + Scrubber */
+  .spotify-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 40%;
+    max-width: 600px;
+  }
+  .spotify-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .spotify-icon-btn {
+    background: transparent;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+  .spotify-icon-btn:hover {
+    color: #ffffff;
+    transform: scale(1.08);
+  }
+  .spotify-icon-btn.active {
+    color: var(--spotify-green);
+  }
+  .spotify-icon-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    width: 4px;
+    height: 4px;
+    background-color: var(--spotify-green);
+    border-radius: 50%;
+  }
+
+  /* Large White Play/Pause Button */
+  .spotify-play-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+  .spotify-play-btn:hover {
+    transform: scale(1.06);
+    background-color: #f3f3f3;
+  }
+
+  /* Progress Bar Row */
+  .spotify-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  .spotify-time {
+    font-size: 0.7rem;
+    color: #a7a7a7;
+    font-variant-numeric: tabular-nums;
+    min-width: 30px;
+    text-align: center;
+  }
+  .spotify-scrubber-wrap {
+    flex: 1;
+    position: relative;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .spotify-bar-track {
+    width: 100%;
+    height: 4px;
+    background: #4d4d4d;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .spotify-bar-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: background-color 0.15s ease;
+  }
+  .spotify-scrubber-wrap:hover .spotify-bar-fill {
+    background-color: var(--spotify-green);
+  }
+
+  /* Right: Lyrics, Queue, Devices, Volume */
+  .spotify-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    width: 30%;
+    min-width: 180px;
+  }
+  .spotify-vol-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 110px;
+  }
+  .spotify-vol-slider {
+    width: 100%;
+    accent-color: #ffffff;
+    cursor: pointer;
+    height: 4px;
+  }
+  .spotify-vol-slider:hover {
+    accent-color: var(--spotify-green);
+  }
+</style>
+
+<div class="main-wrapper">
+  <!-- Top Navigation Bar -->
+  <header class="vault-navbar">
+    <div class="brand-logo" onclick="returnToGallery()">
+      <h1>THE RECORD VAULT</h1>
+      <span class="brand-badge" id="currentAestheticBadge">ARCHIVE</span>
+    </div>
+
+    <div class="nav-actions">
+      <button class="back-btn" id="galleryBackBtn" style="display:none;" onclick="returnToGallery()">
+        ← Back to White Minimalist Gallery
+      </button>
+    </div>
+  </header>
+
+  <!-- Search & Filter Controls -->
+  <div class="directory-toolbar" id="directoryToolbar">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="artistSearchInput" placeholder="Search artists, tracks, countries, or vibes..." oninput="handleSearch(this.value)">
+    </div>
+    <nav class="genre-filter-bar" id="genreFilterBar"></nav>
+  </div>
+
+  <!-- =========================================================
+       VIEW 1: CLEAN MINIMALIST GALLERY VIEW (DEFAULT)
+       ========================================================= -->
+  <div id="catalogGalleryView">
+    <div class="catalog-hero">
+      <h2 class="anchored">Discography Directory</h2>
+      <p>Explore 45+ iconic artists across House, R&amp;B, K-Pop, Hip-Hop, Alt-Rock, Indie, and Pop. Click any artist or album to enter their fully transformed aesthetic world.</p>
+    </div>
+
+    <div class="catalog-section-title">
+      <span id="galleryCountLabel">Artists &amp; Records</span>
+    </div>
+
+    <div class="artist-catalog-grid" id="artistCatalogGrid"></div>
+  </div>
+
+  <!-- =========================================================
+       VIEW 2: IMMERSIVE ALBUM EXPERIENCE VIEW (TRANSFORMED)
+       ========================================================= -->
+  <div id="albumExperienceView">
+    <div class="album-immersive-grid">
+      <!-- Left: Vinyl Stage, Album Info & Dynamic Per-Song Vibe Matches -->
+      <aside class="turntable-card">
+        <div class="vinyl-rig">
+          <div class="vinyl-disc spinning" id="activeVinyl">
+            <div class="vinyl-center-sticker" id="vinylSticker">VINYL</div>
+          </div>
+          <div class="album-sleeve">
+            <img id="activeAlbumCover" src="" alt="Album Cover">
+          </div>
+        </div>
+
+        <h3 class="stage-album-title anchored" id="activeAlbumTitle"></h3>
+        <div class="stage-artist-name" id="activeArtistName"></div>
+        <div class="stage-album-meta" id="activeAlbumMeta"></div>
+
+        <!-- Dynamic Per-Song Vibe Matches -->
+        <div class="vibe-match-panel">
+          <div class="vibe-match-title" id="vibeMatchTitle">✨ If You Like This Track</div>
+          <div class="vibe-match-subtitle" id="vibeMatchSubtitle">Select any track to discover tailored recommendations</div>
+          <div class="vibe-match-list" id="vibeMatchList"></div>
+        </div>
+      </aside>
+
+      <!-- Right: Full Tracklist & Transparent Scoring -->
+      <main class="immersive-track-panel"><header id="title-block-header" class="quarto-title-block"><h1 class="title">The Record Vault: Dynamic Music Archive</h1></header>
+        <div class="immersive-panel-header">
+          <div>
+            <h2 id="tracklistMainTitle" class="anchored">Complete Tracklist</h2>
+            <div style="font-size:0.88rem; color:var(--text-secondary); margin-top:4px;" id="tracklistSubTitle"></div>
+          </div>
+          <span class="track-vibe-badge" id="albumGenreBadge"></span>
+        </div>
+
+        <div id="immersiveTracksList"></div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     SPOTIFY-STYLE FLOATING BOTTOM PLAYER DOCK
+     ========================================================= -->
+<div class="spotify-dock" id="audioDock">
+  <!-- Left Side -->
+  <div class="spotify-left">
+    <img class="spotify-thumb" id="dockThumb" src="" alt="Album Art">
+    <div class="spotify-track-meta">
+      <div class="spotify-track-name" id="dockTrackTitle">No Track Selected</div>
+      <div class="spotify-artist-name" id="dockArtistTitle" onclick="jumpToCurrentArtist()">-</div>
+    </div>
+    <button class="spotify-heart-btn" id="dockHeartBtn" title="Save to Your Library" onclick="toggleLikeCurrentTrack()">
+      ♡
+    </button>
+  </div>
+
+  <!-- Center Controls -->
+  <div class="spotify-center">
+    <div class="spotify-controls-row">
+      <!-- Shuffle / Mix -->
+      <button class="spotify-icon-btn" id="btnShuffle" title="Enable shuffle / mix" onclick="toggleShuffle()">
+        🔀
+      </button>
+
+      <!-- Previous -->
+      <button class="spotify-icon-btn" title="Previous" onclick="playAdjacentTrack(-1)">
+        ⏮
+      </button>
+
+      <!-- Main Play / Pause -->
+      <button class="spotify-play-btn" id="dockPlayPauseBtn" title="Play" onclick="toggleAudioPlayback()">
+        ▶
+      </button>
+
+      <!-- Next -->
+      <button class="spotify-icon-btn" title="Next" onclick="playAdjacentTrack(1)">
+        ⏭
+      </button>
+
+      <!-- Repeat Mode -->
+      <button class="spotify-icon-btn" id="btnRepeat" title="Enable repeat" onclick="toggleRepeat()">
+        🔁
+      </button>
+    </div>
+
+    <!-- Scrubber Row -->
+    <div class="spotify-progress-row">
+      <span class="spotify-time" id="dockTimeCurrent">0:00</span>
+      <div class="spotify-scrubber-wrap" id="scrubberTrack" onclick="handleScrubberClick(event)">
+        <div class="spotify-bar-track">
+          <div class="spotify-bar-fill" id="dockProgressBar"></div>
+        </div>
+      </div>
+      <span class="spotify-time" id="dockTimeTotal">0:30</span>
+    </div>
+  </div>
+
+  <!-- Right Utilities & Volume -->
+  <div class="spotify-right">
+    <button class="spotify-icon-btn" title="Lyrics" onclick="alert('Lyrics synced to preview!')">🎤</button>
+    <button class="spotify-icon-btn" title="Queue" onclick="alert('Queue: playing from current album')">📑</button>
+    <button class="spotify-icon-btn" title="Connect to a device" onclick="alert('Listening on Web Player')">💻</button>
+    
+    <div class="spotify-vol-wrap">
+      <button class="spotify-icon-btn" id="btnMute" title="Mute" onclick="toggleMute()" style="font-size: 0.95rem;">🔊</button>
+      <input type="range" class="spotify-vol-slider" id="volSlider" min="0" max="1" step="0.05" value="0.8" oninput="setAudioVolume(this.value)">
+    </div>
+  </div>
+</div>
+
+<!-- Hidden HTML5 Audio Element -->
+<audio id="globalAudioPlayer" preload="auto"></audio>
+
+<script>
+// State Management
+let currentGenre = "all";
+let searchQuery = "";
+let activeArtist = null;
+let activeAlbum = null;
+let expandedTrackIdx = 0;
+let playingTrack = null;
+let currentTrackIdx = 0;
+
+// Spotify Features: Shuffle, Repeat, Heart
+let isShuffleOn = false;
+let repeatMode = 0; // 0: off, 1: all, 2: one
+let isLiked = false;
+let prevVolume = 0.8;
+
+const audioPlayer = document.getElementById("globalAudioPlayer");
+
+// Web Audio API Synth Fallback
+let webAudioCtx = null;
+function playWebAudioSynthNote() {
+  try {
+    if (!webAudioCtx) {
+      webAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (webAudioCtx.state === 'suspended') webAudioCtx.resume();
+    const osc = webAudioCtx.createOscillator();
+    const gain = webAudioCtx.createGain();
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(440, webAudioCtx.currentTime);
+    gain.gain.setValueAtTime(0.08, webAudioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, webAudioCtx.currentTime + 0.8);
+    osc.connect(gain);
+    gain.connect(webAudioCtx.destination);
+    osc.start();
+    osc.stop(webAudioCtx.currentTime + 0.8);
+  } catch(e) {}
+}
+
+// =========================================================
+// RENDER GENRES
+// =========================================================
+function renderGenres() {
+  const bar = document.getElementById("genreFilterBar");
+  bar.innerHTML = window.DISCOGRAPHY_DATABASE.genres.map(g => `
+    <button class="genre-pill ${g.id === currentGenre ? 'active' : ''}" onclick="selectGenre('${g.id}')">
+      ${g.icon} ${g.name}
+    </button>
+  `).join("");
+}
+
+function selectGenre(genreId) {
+  currentGenre = genreId;
+  renderGenres();
+  if (document.getElementById("catalogGalleryView").style.display !== "none") {
+    renderCatalogGallery();
+  }
+}
+
+function handleSearch(q) {
+  searchQuery = q.toLowerCase().trim();
+  renderCatalogGallery();
+}
+
+// =========================================================
+// RENDER CATALOG GALLERY (WHITE MINIMALIST VIEW)
+// =========================================================
+function renderCatalogGallery() {
+  const grid = document.getElementById("artistCatalogGrid");
+  let filteredArtists = window.DISCOGRAPHY_DATABASE.artists;
+
+  if (currentGenre !== "all") {
+    filteredArtists = filteredArtists.filter(a => a.genreId === currentGenre);
+  }
+
+  if (searchQuery) {
+    filteredArtists = filteredArtists.filter(a => 
+      a.name.toLowerCase().includes(searchQuery) ||
+      a.genre.toLowerCase().includes(searchQuery) ||
+      a.origin.toLowerCase().includes(searchQuery) ||
+      a.albums.some(alb => alb.title.toLowerCase().includes(searchQuery) || alb.tracks.some(t => t.title.toLowerCase().includes(searchQuery)))
+    );
+  }
+
+  document.getElementById("galleryCountLabel").innerText = `Showing ${filteredArtists.length} Artist${filteredArtists.length !== 1 ? 's' : ''}`;
+
+  if (filteredArtists.length === 0) {
+    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-secondary);">No artists found matching "${searchQuery}". Try another search or select "All Genres".</div>`;
+    return;
+  }
+
+  grid.innerHTML = filteredArtists.map(artist => `
+    <article class="catalog-artist-card" onclick="openArtistAlbum('${artist.id}', 0)">
+      <div class="artist-portrait-wrap">
+        <img class="artist-portrait" src="${artist.image}" alt="${artist.name}" loading="lazy">
+      </div>
+      <div class="artist-card-info">
+        <div class="artist-card-header">
+          <h3 class="artist-title">${artist.name}</h3>
+          <span class="artist-country">📍 ${artist.origin}</span>
+        </div>
+        <span class="artist-genre-pill">${artist.genre}</span>
+        <p class="artist-bio-snippet">${artist.bio}</p>
+      </div>
+      <div class="artist-albums-preview">
+        ${artist.albums.map(alb => `
+          <img class="album-mini-thumb" src="${alb.cover}" alt="${alb.title}" title="${alb.title} (${alb.year})">
+        `).join("")}
+        <div class="album-mini-info">
+          <strong>${artist.albums[0].title}</strong>
+          <div>${artist.albums[0].tracks.length} Tracks • Click to play</div>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+// =========================================================
+// AESTHETIC TRANSFORMATION ENGINE
+// =========================================================
+function applyAlbumAesthetic(album) {
+  const root = document.documentElement;
+  const aes = album.aesthetic;
+
+  root.style.setProperty('--bg-page', aes.bg);
+  root.style.setProperty('--bg-surface', aes.cardBg);
+  root.style.setProperty('--bg-card', aes.cardBg);
+  root.style.setProperty('--border-color', aes.cardBorder);
+  root.style.setProperty('--text-primary', aes.text);
+  root.style.setProperty('--text-secondary', aes.textMuted);
+  root.style.setProperty('--accent-color', aes.accent);
+  root.style.setProperty('--accent-glow', aes.glow);
+  root.style.setProperty('--font-heading', aes.fontFamily);
+  root.style.setProperty('--text-transform', aes.textTransform);
+  root.style.setProperty('--tag-bg', aes.tagBg);
+  root.style.setProperty('--tag-text', aes.tagText);
+  root.style.setProperty('--pill-bg', aes.accent);
+  root.style.setProperty('--pill-text', (aes.mode === 'brat') ? '#000000' : '#ffffff');
+
+  document.getElementById("currentAestheticBadge").innerText = aes.badge.toUpperCase();
+}
+
+function resetToMinimalistTheme() {
+  const root = document.documentElement;
+  root.style.setProperty('--bg-page', '#ffffff');
+  root.style.setProperty('--bg-surface', '#f9fafb');
+  root.style.setProperty('--bg-card', '#ffffff');
+  root.style.setProperty('--border-color', '#e5e7eb');
+  root.style.setProperty('--text-primary', '#111827');
+  root.style.setProperty('--text-secondary', '#6b7280');
+  root.style.setProperty('--accent-color', '#111827');
+  root.style.setProperty('--accent-glow', 'rgba(0, 0, 0, 0.08)');
+  root.style.setProperty('--font-heading', '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif');
+  root.style.setProperty('--text-transform', 'none');
+  root.style.setProperty('--tag-bg', '#f3f4f6');
+  root.style.setProperty('--tag-text', '#374151');
+  root.style.setProperty('--pill-bg', '#111827');
+  root.style.setProperty('--pill-text', '#ffffff');
+
+  document.getElementById("currentAestheticBadge").innerText = "ARCHIVE";
+}
+
+// =========================================================
+// OPEN ALBUM & IMMERSIVE VIEW
+// =========================================================
+function openArtistAlbum(artistId, albumIdx, targetTrackTitle) {
+  activeArtist = window.DISCOGRAPHY_DATABASE.artists.find(a => a.id === artistId);
+  if (!activeArtist) return;
+  activeAlbum = activeArtist.albums[albumIdx];
+  
+  // Find index of target track if provided
+  if (targetTrackTitle) {
+    const foundIdx = activeAlbum.tracks.findIndex(t => t.title.toLowerCase() === targetTrackTitle.toLowerCase());
+    expandedTrackIdx = (foundIdx !== -1) ? foundIdx : 0;
+  } else {
+    expandedTrackIdx = 0;
+  }
+
+  // Apply curated album aesthetic
+  applyAlbumAesthetic(activeAlbum);
+
+  // Switch Views
+  document.getElementById("catalogGalleryView").style.display = "none";
+  document.getElementById("albumExperienceView").style.display = "block";
+  document.getElementById("galleryBackBtn").style.display = "inline-flex";
+  document.getElementById("directoryToolbar").style.display = "none";
+
+  // Render Turntable Stage
+  document.getElementById("activeAlbumCover").src = activeAlbum.cover;
+  document.getElementById("activeAlbumTitle").innerText = activeAlbum.title;
+  document.getElementById("activeArtistName").innerText = `${activeArtist.name} • 📍 ${activeArtist.origin}`;
+  document.getElementById("activeAlbumMeta").innerText = `${activeAlbum.year} • ${activeAlbum.tracks.length} Mastered Tracks`;
+  document.getElementById("vinylSticker").innerText = activeAlbum.title.slice(0, 8);
+
+  // Render Initial Song Vibe Matches for current track
+  if (activeAlbum.tracks.length > 0) {
+    updateDynamicVibeMatches(activeAlbum.tracks[expandedTrackIdx]);
+  }
+
+  // Render Tracks
+  document.getElementById("tracklistMainTitle").innerText = `${activeAlbum.title}`;
+  document.getElementById("tracklistSubTitle").innerText = `${activeArtist.name} • ${activeAlbum.tracks.length} Songs`;
+  document.getElementById("albumGenreBadge").innerText = activeArtist.genre;
+
+  renderImmersiveTracks();
+
+  if (targetTrackTitle && expandedTrackIdx >= 0) {
+    startPlayTrack(expandedTrackIdx);
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateDynamicVibeMatches(track) {
+  if (!track) return;
+  document.getElementById("vibeMatchTitle").innerText = `✨ If You Like "${track.title}"`;
+  document.getElementById("vibeMatchSubtitle").innerText = `Tailored sound matches for this song:`;
+
+  const matches = track.similar_tracks || [];
+  document.getElementById("vibeMatchList").innerHTML = matches.map(m => `
+    <div class="vibe-match-chip" onclick="navigateToVibeMatch('${m.artistId}', '${m.song.replace(/'/g, "\\'")}')">
+      <div>
+        <div class="vibe-match-artist">🎵 ${m.artist}</div>
+        <div class="vibe-match-song">"${m.song}"</div>
+      </div>
+      <span style="font-size:0.8rem; color:var(--accent-color);">▶</span>
+    </div>
+  `).join("");
+}
+
+function navigateToVibeMatch(artistId, songTitle) {
+  const targetArtist = window.DISCOGRAPHY_DATABASE.artists.find(a => a.id === artistId);
+  if (targetArtist) {
+    openArtistAlbum(artistId, 0, songTitle);
+  }
+}
+
+function returnToGallery() {
+  resetToMinimalistTheme();
+  document.getElementById("catalogGalleryView").style.display = "block";
+  document.getElementById("albumExperienceView").style.display = "none";
+  document.getElementById("galleryBackBtn").style.display = "none";
+  document.getElementById("directoryToolbar").style.display = "flex";
+  renderCatalogGallery();
+}
+
+function jumpToCurrentArtist() {
+  if (activeArtist) {
+    openArtistAlbum(activeArtist.id, 0);
+  }
+}
+
+// =========================================================
+// TRACKLIST & INTERACTIVE METRICS RENDERING
+// =========================================================
+function toggleTrackExpand(idx, event) {
+  if (event && (event.target.closest('.track-play-btn') || event.target.closest('input'))) return;
+  expandedTrackIdx = (expandedTrackIdx === idx) ? -1 : idx;
+  
+  if (expandedTrackIdx !== -1) {
+    updateDynamicVibeMatches(activeAlbum.tracks[expandedTrackIdx]);
+  }
+  renderImmersiveTracks();
+}
+
+function updateTrackUserScore(idx, val) {
+  document.getElementById(`userScoreDisplay-${idx}`).innerText = parseFloat(val).toFixed(1);
+}
+
+function renderImmersiveTracks() {
+  const container = document.getElementById("immersiveTracksList");
+  container.innerHTML = activeAlbum.tracks.map((track, idx) => {
+    const isExpanded = (idx === expandedTrackIdx);
+    const isCurrentlyPlaying = (playingTrack && playingTrack.title === track.title);
+
+    return `
+      <div class="track-card ${isExpanded ? 'active' : ''}" onclick="toggleTrackExpand(${idx}, event)">
+        <div class="track-card-main">
+          <div class="track-left">
+            <span class="track-index-num">${track.pos}</span>
+            <div>
+              <div class="track-title-text">
+                ${track.title}
+                ${isCurrentlyPlaying ? `
+                  <span class="track-eq">
+                    <span class="track-eq-bar"></span>
+                    <span class="track-eq-bar"></span>
+                    <span class="track-eq-bar"></span>
+                  </span>
+                ` : ''}
+              </div>
+              <span class="track-vibe-badge">${track.vibe}</span>
+            </div>
+          </div>
+
+          <div class="track-right">
+            <span class="track-time">${track.duration}</span>
+            <span class="track-score-badge">★ ${track.overall}</span>
+            <button class="track-play-btn" onclick="startPlayTrack(${idx}, event)">
+              ${isCurrentlyPlaying ? '⏸ Pause' : '▶ Play'}
+            </button>
+          </div>
+        </div>
+
+        ${isExpanded ? `
+          <div class="score-breakdown-panel">
+            <div class="why-metric-quote">
+              <strong>💡 Critic Rationale (${track.overall}/10):</strong> ${track.why}
+            </div>
+
+            <div class="pillars-row">
+              <div class="pillar-box">
+                <div class="pillar-header">
+                  <span>Catchiness</span>
+                  <span>${track.pillars.catchiness}/10</span>
+                </div>
+                <div class="pillar-bar-shell">
+                  <div class="pillar-bar-fill" style="width: ${track.pillars.catchiness * 10}%"></div>
+                </div>
+              </div>
+
+              <div class="pillar-box">
+                <div class="pillar-header">
+                  <span>Production</span>
+                  <span>${track.pillars.production}/10</span>
+                </div>
+                <div class="pillar-bar-shell">
+                  <div class="pillar-bar-fill" style="width: ${track.pillars.production * 10}%"></div>
+                </div>
+              </div>
+
+              <div class="pillar-box">
+                <div class="pillar-header">
+                  <span>Vocal Delivery</span>
+                  <span>${track.pillars.vocal}/10</span>
+                </div>
+                <div class="pillar-bar-shell">
+                  <div class="pillar-bar-fill" style="width: ${track.pillars.vocal * 10}%"></div>
+                </div>
+              </div>
+
+              <div class="pillar-box">
+                <div class="pillar-header">
+                  <span>Replay Value</span>
+                  <span>${track.pillars.replay}/10</span>
+                </div>
+                <div class="pillar-bar-shell">
+                  <div class="pillar-bar-fill" style="width: ${track.pillars.replay * 10}%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="interactive-user-rater">
+              <span>Your Score:</span>
+              <input type="range" min="1" max="10" step="0.1" value="${track.overall}" oninput="updateTrackUserScore(${idx}, this.value)">
+              <strong><span id="userScoreDisplay-${idx}">${track.overall}</span> / 10</strong>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join("");
+}
+
+// =========================================================
+// SPOTIFY AUDIO ENGINE & CONTROLS (SHUFFLE, REPEAT, SCRUB)
+// =========================================================
+function startPlayTrack(trackIdx, event) {
+  if (event) event.stopPropagation();
+  currentTrackIdx = trackIdx;
+  const track = activeAlbum.tracks[trackIdx];
+
+  if (playingTrack && playingTrack.title === track.title) {
+    toggleAudioPlayback();
+    return;
+  }
+
+  playingTrack = track;
+  updateSpotifyDockUI();
+  updateDynamicVibeMatches(track);
+
+  if (track.preview) {
+    audioPlayer.src = track.preview;
+    audioPlayer.play().catch(err => {
+      console.warn("Autoplay blocked or network issue, using synth fallback:", err);
+      playWebAudioSynthNote();
+    });
+  } else {
+    playWebAudioSynthNote();
+  }
+
+  document.getElementById("activeVinyl").classList.add("spinning");
+  renderImmersiveTracks();
+}
+
+function toggleAudioPlayback() {
+  if (!playingTrack) {
+    if (activeAlbum && activeAlbum.tracks.length > 0) {
+      startPlayTrack(0);
+    }
+    return;
+  }
+
+  if (audioPlayer.paused) {
+    audioPlayer.play().catch(() => playWebAudioSynthNote());
+    document.getElementById("dockPlayPauseBtn").innerText = "⏸";
+    document.getElementById("activeVinyl").classList.add("spinning");
+  } else {
+    audioPlayer.pause();
+    document.getElementById("dockPlayPauseBtn").innerText = "▶";
+    document.getElementById("activeVinyl").classList.remove("spinning");
+  }
+  renderImmersiveTracks();
+}
+
+function playAdjacentTrack(direction) {
+  if (!activeAlbum || !activeAlbum.tracks.length) return;
+
+  if (isShuffleOn && direction > 0) {
+    let nextIdx;
+    do {
+      nextIdx = Math.floor(Math.random() * activeAlbum.tracks.length);
+    } while (nextIdx === currentTrackIdx && activeAlbum.tracks.length > 1);
+    startPlayTrack(nextIdx);
+    return;
+  }
+
+  let nextIdx = currentTrackIdx + direction;
+  if (nextIdx < 0) nextIdx = activeAlbum.tracks.length - 1;
+  if (nextIdx >= activeAlbum.tracks.length) nextIdx = 0;
+  startPlayTrack(nextIdx);
+}
+
+function toggleShuffle() {
+  isShuffleOn = !isShuffleOn;
+  const btn = document.getElementById("btnShuffle");
+  if (isShuffleOn) {
+    btn.classList.add("active");
+  } else {
+    btn.classList.remove("active");
+  }
+}
+
+function toggleRepeat() {
+  repeatMode = (repeatMode + 1) % 3;
+  const btn = document.getElementById("btnRepeat");
+  if (repeatMode === 0) {
+    btn.classList.remove("active");
+    btn.innerText = "🔁";
+    btn.title = "Enable repeat";
+  } else if (repeatMode === 1) {
+    btn.classList.add("active");
+    btn.innerText = "🔁";
+    btn.title = "Repeat all";
+  } else if (repeatMode === 2) {
+    btn.classList.add("active");
+    btn.innerText = "🔂";
+    btn.title = "Repeat current song";
+  }
+}
+
+function toggleLikeCurrentTrack() {
+  isLiked = !isLiked;
+  const btn = document.getElementById("dockHeartBtn");
+  if (isLiked) {
+    btn.innerText = "💚";
+    btn.classList.add("liked");
+  } else {
+    btn.innerText = "♡";
+    btn.classList.remove("liked");
+  }
+}
+
+function updateSpotifyDockUI() {
+  const dock = document.getElementById("audioDock");
+  dock.classList.add("visible");
+  document.getElementById("dockThumb").src = activeAlbum.cover;
+  document.getElementById("dockTrackTitle").innerText = playingTrack.title;
+  document.getElementById("dockArtistTitle").innerText = `${activeArtist.name}`;
+  document.getElementById("dockPlayPauseBtn").innerText = "⏸";
+}
+
+function handleScrubberClick(e) {
+  const rect = document.getElementById("scrubberTrack").getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const pct = Math.max(0, Math.min(1, clickX / rect.width));
+  const total = audioPlayer.duration || 30;
+  audioPlayer.currentTime = pct * total;
+}
+
+function setAudioVolume(val) {
+  audioPlayer.volume = val;
+  const btn = document.getElementById("btnMute");
+  btn.innerText = (val == 0) ? "🔇" : "🔊";
+}
+
+function toggleMute() {
+  const vol = document.getElementById("volSlider");
+  if (audioPlayer.volume > 0) {
+    prevVolume = audioPlayer.volume;
+    audioPlayer.volume = 0;
+    vol.value = 0;
+    document.getElementById("btnMute").innerText = "🔇";
+  } else {
+    audioPlayer.volume = prevVolume || 0.8;
+    vol.value = audioPlayer.volume;
+    document.getElementById("btnMute").innerText = "🔊";
+  }
+}
+
+// Synchronize Audio Events
+audioPlayer.addEventListener("timeupdate", () => {
+  const cur = Math.floor(audioPlayer.currentTime);
+  const total = Math.floor(audioPlayer.duration || 30);
+  document.getElementById("dockTimeCurrent").innerText = `0:${cur < 10 ? '0' + cur : cur}`;
+  document.getElementById("dockTimeTotal").innerText = `0:${total < 10 ? '0' + total : total}`;
+  const pct = (audioPlayer.currentTime / total) * 100;
+  document.getElementById("dockProgressBar").style.width = `${pct}%`;
+});
+
+audioPlayer.addEventListener("ended", () => {
+  if (repeatMode === 2) {
+    audioPlayer.currentTime = 0;
+    audioPlayer.play();
+  } else if (repeatMode === 1 || isShuffleOn) {
+    playAdjacentTrack(1);
+  } else {
+    if (currentTrackIdx < activeAlbum.tracks.length - 1) {
+      playAdjacentTrack(1);
+    } else {
+      document.getElementById("dockPlayPauseBtn").innerText = "▶";
+      document.getElementById("activeVinyl").classList.remove("spinning");
+    }
+  }
+});
+
+// =========================================================
+// INITIALIZE
+// =========================================================
+renderGenres();
+renderCatalogGallery();
+</script>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+    tabsets.forEach(function(tabset) {
+      const tabby = new Tabby('#' + tabset.id);
+    });
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+
+
+
+
+</body></html>
